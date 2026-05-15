@@ -1,0 +1,30 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+$page_css = "../css/" . $current_page . ".css";
+if (!file_exists(__DIR__ . "/../css/" . $current_page . ".css")) {
+    $page_css = "../css/dashboard.css";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="<?php echo $page_css; ?>">
+</head>
+<body>
+<nav class="navbar">
+    <h3>Online Quiz Platform</h3>
+    <div>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="courses.php">Browse Courses</a>
+        <a href="my_courses.php">My Courses</a>
+        <a href="history.php">History</a>
+        <a href="performance.php">Performance</a>
+        <a href="doubt_sessions.php">Doubt Sessions</a>
+        <a href="profile.php">Profile</a>
+        <a href="logout.php">Logout</a>
+    </div>
+</nav>
+<main class="container">
+<div id="message"></div>
