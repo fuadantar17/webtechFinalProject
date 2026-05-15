@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+<div class="auth-container">
+    <div class="card large-card">
+        <h2>Student Registration</h2>
+        <p class="muted">Register with name, email, student ID, program, password and profile picture.</p>
+
+        <div id="message"></div>
+
+        <form method="POST" action="../php/register.php" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
+            <div class="form-grid">
+                <div>
+                    <label>Name</label>
+                    <input id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label>Email</label>
+                    <input id="email" name="email" type="email" required>
+                </div>
+
+                <div>
+                    <label>Student ID / Username</label>
+                    <input id="student_id" name="student_id" required>
+                </div>
+
+                <div>
+                    <label>Program</label>
+                    <input id="program" name="program" placeholder="CSE" required>
+                </div>
+
+                <div>
+                    <label>Phone</label>
+                    <input id="phone" name="phone" placeholder="01700000000">
+                </div>
+
+                <div>
+                    <label>Profile Picture</label>
+                    <input id="profile_pic" name="profile_pic" type="file" accept="image/jpeg,image/png,image/webp">
+                </div>
+
+                <div>
+                    <label>Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+
+                <div>
+                    <label>Confirm Password</label>
+                    <input id="confirm_password" name="confirm_password" type="password" required>
+                </div>
+            </div>
+
+            <button>Register</button>
+        </form>
+
+        <p class="bottom-text">Already have account? <a href="../php/login.php">Login</a></p>
+    </div>
+</div>
+<script src="../js/validation.js"></script>
+</body>
+</html>
