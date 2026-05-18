@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="auth-container">
+    <div class="card">
+        <h2>Student Login</h2>
+        <p class="muted">Use Student ID, not email.</p>
+
+        <div id="message"></div>
+
+        <form method="POST" action="../php/login.php" onsubmit="return validateLoginForm()">
+            <label>Student ID / Username</label>
+            <input id="student_id" name="student_id" placeholder="STU-001" required>
+
+            <label>Password</label>
+            <input id="password" name="password" type="password" required>
+
+            <button>Login</button>
+        </form>
+
+        <p class="bottom-text">New student? <a href="../php/register.php">Register here</a></p>
+    </div>
+</div>
+<script src="../js/validation.js"></script>
+</body>
+</html>

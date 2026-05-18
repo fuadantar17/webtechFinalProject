@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="card">
+
+        <h2>Admin Login</h2>
+        <p class="muted">Login using your Admin ID</p>
+
+        <?php if(isset($_GET['error'])): ?>
+            <div class="message-error">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" action="../php/login.php">
+
+            <label>Admin ID</label>
+            <input 
+                type="number" 
+                name="id" 
+                placeholder="Enter Admin ID"
+                required
+            >
+
+            <label>Password</label>
+            <input 
+                type="password" 
+                name="password" 
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
