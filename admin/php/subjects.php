@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name        = trim($_POST['name'] ?? '');
     $description = trim($_POST['description'] ?? '');
 
+    
     if ($name === '') {
         header("Location: subjects.php?error=Subject name is required");
         exit;
