@@ -3,9 +3,6 @@ require_once "auth.php";
 requireAdminLogin();
 require_once "../database/db.php";
 
-function e($value) {
-    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
-}
 
 function countData($conn, $sql) {
     $result = $conn->query($sql);
