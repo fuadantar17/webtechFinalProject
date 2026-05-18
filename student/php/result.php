@@ -36,5 +36,6 @@ include "../html/header.html";
         echo "<div class='list-item'><b>" . e($r['question_text']) . "</b><p>Your answer: " . e($r['option_text'] ?: 'Not answered') . " " . ($r['is_correct'] ? "✅" : "❌") . "</p></div>";
     }
     ?>
+    
 </div>
 <?php include "../html/footer.html"; ?>
