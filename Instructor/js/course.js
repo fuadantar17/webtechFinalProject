@@ -1,6 +1,6 @@
 function deleteCourse(id){
 
-    if(confirm("⚠ Are you sure you want to delete this course?")){
+    if(confirm(" Are you sure you want to delete this course?")){
 
         var xhttp = new XMLHttpRequest();
 
