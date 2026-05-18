@@ -3,80 +3,124 @@ require_once "auth.php";
 requireStudentLogin();
 require_once "../database/db.php";
 
-$user_id = $_SESSION["user_id"];
-$search = trim($_GET["search"] ?? "");
-$subject = (int)($_GET["subject"] ?? 0);
+$user_id = (int)$_SESSION["user_id"];
 
-$sql = "SELECT c.*, s.name AS subject_name, u.name AS instructor_name,
-        (SELECT COUNT(*) FROM enrollments e WHERE e.course_id = c.id AND e.status = 'active') AS enrolled_count,
-        (SELECT status FROM enrollments e WHERE e.course_id = c.id AND e.student_id = ? LIMIT 1) AS my_status
-        FROM courses c
-        JOIN subjects s ON c.subject_id = s.id
-        JOIN users u ON c.instructor_id = u.id
-        WHERE c.status = 'active'";
+/* ENROLL COURSE */
+if (isset($_GET["enroll"])) {
+    $course_id = (int)$_GET["enroll"];
 
-$params = [$user_id];
-$types = "i";
+    if ($course_id <= 0) {
+        header("Location: courses.php?error=Invalid course");
+        exit;
+    }
 
-if ($search !== "") {
-    $sql .= " AND (c.title LIKE ? OR c.description LIKE ?)";
-    $like = "%" . $search . "%";
-    $params[] = $like;
-    $params[] = $like;
-    $types .= "ss";
+    // Check course exists and active
+    $courseCheck = $conn->prepare("SELECT id FROM courses WHERE id = ? AND status = 'active'");
+    $courseCheck->bind_param("i", $course_id);
+    $courseCheck->execute();
+
+    if ($courseCheck->get_result()->num_rows < 1) {
+        header("Location: courses.php?error=Course not found");
+        exit;
+    }
+
+    // Check enrollment
+    $check = $conn->prepare("SELECT id, status FROM enrollments WHERE student_id = ? AND course_id = ? LIMIT 1");
+    $check->bind_param("ii", $user_id, $course_id);
+    $check->execute();
+    $existing = $check->get_result()->fetch_assoc();
+
+    if ($existing) {
+        if ($existing["status"] === "dropped") {
+            $update = $conn->prepare("UPDATE enrollments SET status = 'active', enrolled_at = NOW() WHERE id = ?");
+            $update->bind_param("i", $existing["id"]);
+            $update->execute();
+        }
+    } else {
+        $insert = $conn->prepare("INSERT INTO enrollments (student_id, course_id, status, enrolled_at) VALUES (?, ?, 'active', NOW())");
+        $insert->bind_param("ii", $user_id, $course_id);
+        $insert->execute();
+    }
+
+    header("Location: my_courses.php?success=Enrolled successfully");
+    exit;
 }
 
-if ($subject > 0) {
-    $sql .= " AND c.subject_id = ?";
-    $params[] = $subject;
-    $types .= "i";
-}
-
-$sql .= " ORDER BY c.created_at DESC";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param($types, ...$params);
+/* ACTIVE COURSES */
+$stmt = $conn->prepare("
+    SELECT 
+        c.id,
+        c.title,
+        c.description,
+        c.status,
+        u.name AS instructor_name,
+        s.name AS subject_name,
+        e.status AS enrollment_status
+    FROM courses c
+    LEFT JOIN users u ON c.instructor_id = u.id
+    LEFT JOIN subjects s ON c.subject_id = s.id
+    LEFT JOIN enrollments e 
+        ON e.course_id = c.id 
+        AND e.student_id = ?
+        AND e.status IN ('active','pending')
+    WHERE c.status = 'active'
+    ORDER BY c.id DESC
+");
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
-$courses = $stmt->get_result();
+$result = $stmt->get_result();
 
 include "../html/header.html";
 ?>
-<div class="card">
-    <h2>Active Courses</h2>
-    <form method="GET" class="inline-form">
-        <input name="search" placeholder="Search by keyword" value="<?php echo e($search); ?>">
-        <select name="subject">
-            <option value="0">All Subjects</option>
-            <?php
-            $subs = $conn->query("SELECT id, name FROM subjects ORDER BY name");
-            while ($s = $subs->fetch_assoc()) {
-                $selected = $subject == $s['id'] ? 'selected' : '';
-                echo "<option value='" . e($s['id']) . "' $selected>" . e($s['name']) . "</option>";
-            }
-            ?>
-        </select>
-        <button>Search</button>
-    </form>
-</div>
+
+<h2>Browse Active Courses</h2>
+
+<?php if (isset($_GET["error"])): ?>
+    <div class="card" style="color:red;">
+        <?php echo e($_GET["error"]); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET["success"])): ?>
+    <div class="card" style="color:green;">
+        <?php echo e($_GET["success"]); ?>
+    </div>
+<?php endif; ?>
 
 <div class="grid-cards">
-<?php while ($c = $courses->fetch_assoc()): ?>
-    <div class="card">
-        <h3><?php echo e($c['title']); ?></h3>
-        <p><?php echo e($c['description']); ?></p>
-        <p><b>Subject:</b> <?php echo e($c['subject_name']); ?></p>
-        <p><b>Instructor:</b> <?php echo e($c['instructor_name']); ?></p>
-        <p><b>Enrolled:</b> <?php echo e($c['enrolled_count']); ?>/<?php echo e($c['max_students']); ?></p>
-        <p><b>Enrollment:</b> <?php echo e($c['enrollment_type']); ?></p>
+    <?php while ($course = $result->fetch_assoc()): ?>
+        <div class="card">
+            <h3><?php echo e($course["title"]); ?></h3>
 
-        <?php if ($c['my_status']): ?>
-            <span class="badge">Status: <?php echo e($c['my_status']); ?></span>
-        <?php else: ?>
-            <a class="btn-link" href="enroll.php?course_id=<?php echo e($c['id']); ?>">Enroll</a>
-        <?php endif; ?>
+            <p><?php echo e($course["description"]); ?></p>
 
-        <a class="btn-link secondary" href="course_detail.php?id=<?php echo e($c['id']); ?>">Details</a>
-    </div>
-<?php endwhile; ?>
+            <p>
+                <b>Subject:</b>
+                <?php echo e($course["subject_name"] ?: "Not assigned"); ?>
+            </p>
+
+            <p>
+                <b>Instructor:</b>
+                <?php echo e($course["instructor_name"] ?: "Not assigned"); ?>
+            </p>
+
+            <?php if ($course["enrollment_status"]): ?>
+                <p><b>Status:</b> <?php echo e($course["enrollment_status"]); ?></p>
+
+                <a class="btn-link" href="course_detail.php?id=<?php echo e($course["id"]); ?>">
+                    Open Course
+                </a>
+            <?php else: ?>
+                <a 
+                    class="btn-link" 
+                    href="courses.php?enroll=<?php echo e($course["id"]); ?>"
+                    onclick="return confirm('Enroll in this course?');"
+                >
+                    Enroll
+                </a>
+            <?php endif; ?>
+        </div>
+    <?php endwhile; ?>
 </div>
+
 <?php include "../html/footer.html"; ?>
