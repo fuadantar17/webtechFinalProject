@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $_SESSION["profile_pic"] = $user["profile_pic"];
 
     header("Location: dashboard.php");
-    exit;
+    exit; 
 }
 
 include "../html/login.html";
