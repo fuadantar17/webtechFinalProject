@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($id === "" || $password === "") {
         header("Location: login.php?error=ID and password are required");
         exit;
+        
     }
 
     $stmt = $conn->prepare 

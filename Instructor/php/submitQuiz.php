@@ -5,19 +5,19 @@ require_once("../database/db.php");
 $quiz_id = $_POST['quiz_id'];
 $total_score = 0;
 
-// সব questions বের করো
+
 $questions = $conn->query("SELECT * FROM questions WHERE quiz_id=$quiz_id");
 
 while($q = $questions->fetch_assoc()){
 
     $qid = $q['id'];
 
-    // user answer
+   
     if(isset($_POST["q$qid"])){
 
         $selected_option = $_POST["q$qid"];
 
-        // correct option check
+        
         $result = $conn->query("SELECT * FROM options WHERE id=$selected_option");
         $opt = $result->fetch_assoc();
 
@@ -44,7 +44,7 @@ while($q = $questions->fetch_assoc()){
 
 <div class="card p-4 shadow text-center">
 
-    <h2>Quiz Completed 🎉</h2>
+    <h2>Quiz Completed </h2>
 
     <h3>Your Score:</h3>
 
