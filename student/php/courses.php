@@ -42,7 +42,7 @@ $courses = $stmt->get_result();
 include "../html/header.html";
 ?>
 <div class="card">
-    <h2>Browse Active Courses</h2>
+    <h2>Active Courses</h2>
     <form method="GET" class="inline-form">
         <input name="search" placeholder="Search by keyword" value="<?php echo e($search); ?>">
         <select name="subject">
