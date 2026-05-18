@@ -22,11 +22,11 @@ require_once("../database/db.php");
 <div class="sidebar">
     <h3>Instructor</h3>
 
-    <a href="createCourse.php">➕ Create Course</a>
-    <a href="viewCourses.php">📚 View Courses</a>
-    <a href="createQuiz.php">📝 Create Quiz</a>
-    <a href="viewQuizzes.php">📊 View Quizzes</a>
-    <a href="../php/logout.php">🚪 Logout</a>
+    <a href="createCourse.php"> Create Course</a>
+    <a href="viewCourses.php"> View Courses</a>
+    <a href="createQuiz.php"> Create Quiz</a>
+    <a href="viewQuizzes.php"> View Quizzes</a>
+    <a href="../php/logout.php"> Logout</a>
 </div>
 
 <!-- MAIN -->

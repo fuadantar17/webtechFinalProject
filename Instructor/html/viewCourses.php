@@ -21,7 +21,7 @@ require_once("../database/db.php");
 
     <div class="card-box">
 
-        <h3 class="title">📚 My Courses</h3>
+        <h3 class="title"> My Courses</h3>
 
         <div class="table-responsive">
 
@@ -82,7 +82,7 @@ require_once("../database/db.php");
 
         </div>
 
-        <!-- 🔥 BACK BUTTON (BOTTOM) -->
+        
         <div class="bottom-bar">
             <a href="dashboard.php" class="btn-back">⬅ Back to Dashboard</a>
         </div>
