@@ -29,7 +29,7 @@ if(isset($_POST['login'])){
 
         if(password_verify($password, $user['password_hash'])){
 
-            // session data
+           
             $_SESSION['instructor_id'] = $user['id'];
             $_SESSION['instructor_name'] = $user['name'];
             $_SESSION['role'] = $user['role'];
