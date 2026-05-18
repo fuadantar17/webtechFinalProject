@@ -1,0 +1,29 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+$page_css = "../css/" . $current_page . ".css";
+if (!file_exists(__DIR__ . "/../css/" . $current_page . ".css")) {
+    $page_css = "../css/dashboard.css";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel – Online Quiz Platform</title>
+    <link rel="stylesheet" href="<?php echo $page_css; ?>">
+</head>
+<body>
+<nav class="navbar">
+    <h3>🛡️ Admin Panel</h3>
+    <div>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="users.php">Users</a>
+        <a href="courses.php">Courses</a>
+        <a href="subjects.php">Subjects</a>
+        <a href="quizzes.php">Quizzes</a>
+        <a href="enrollments.php">Enrollments</a>
+        <a href="logout.php">Logout</a>
+    </div>
+</nav>
+<main class="container">
+<div id="message"></div>
