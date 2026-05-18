@@ -186,6 +186,6 @@ include "../html/header.html";
             </tbody>
         </table>
     </div>
-</div>
+</div> 
 
 <?php include "../html/footer.html"; ?>
