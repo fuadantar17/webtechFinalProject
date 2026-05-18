@@ -21,6 +21,7 @@ if ($action === 'toggle' && isset($_GET['id'])) {
     $conn->query(
         "UPDATE quizzes SET status = CASE WHEN status='published' THEN 'closed' ELSE 'published' END WHERE id = $id"
     );
+    
     header("Location: quizzes.php?success=Quiz status updated");
     exit;
 }
