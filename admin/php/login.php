@@ -16,10 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $stmt = $conn->prepare(
+    $stmt = $conn->prepare 
+    (
         "SELECT id, name, email, password_hash, role, is_active, profile_pic
          FROM users WHERE id = ? AND role = 'admin' LIMIT 1"
     );
+
 
     if (!$stmt) {
         die("Query failed: " . $conn->error);
