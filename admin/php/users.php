@@ -13,6 +13,7 @@ if ($action === 'toggle' && isset($_GET['id'])) {
     $conn->query("UPDATE users SET is_active = 1 - is_active WHERE id = $id");
     header("Location: users.php?success=User status updated");
     exit;
+    
 }
 
 // ── Delete user ───────────────────────────────────────────────────────────────
