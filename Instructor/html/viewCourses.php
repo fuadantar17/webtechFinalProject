@@ -82,7 +82,7 @@ require_once("../database/db.php");
 
         </div>
 
-        <!--  BACK BUTTON (BOTTOM) -->
+        
         <div class="bottom-bar">
             <a href="dashboard.php" class="btn-back">⬅ Back to Dashboard</a>
         </div>
