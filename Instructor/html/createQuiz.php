@@ -25,7 +25,7 @@ require_once("../database/db.php");
             ⬅ Back to Dashboard
         </a>
 
-        <h2>📝 Create Quiz</h2>
+        <h2> Create Quiz</h2>
 
         <form action="../php/quizInsert.php" method="POST">
 
@@ -58,7 +58,7 @@ require_once("../database/db.php");
             <input type="number" name="total_marks" required>
 
             <button type="submit">
-                ➕ Create Quiz
+                 Create Quiz
             </button>
 
         </form>
