@@ -31,7 +31,7 @@ $result = $conn->query($sql);
     <!-- BACK -->
     <a href="dashboard.php" class="back-btn">⬅ Back to Dashboard</a>
 
-    <h2 class="title">📚 My Quizzes</h2>
+    <h2 class="title">My Quizzes</h2>
 
     <div class="row">
 
@@ -43,9 +43,9 @@ $result = $conn->query($sql);
 
                 <h4><?php echo $row['title']; ?></h4>
 
-                <p>📘 Course: <?php echo $row['course_name']; ?></p>
-                <p>⏱ Time: <?php echo $row['time_limit_minutes']; ?> min</p>
-                <p>🎯 Marks: <?php echo $row['total_marks']; ?></p>
+                <p> Course: <?php echo $row['course_name']; ?></p>
+                <p> Time: <?php echo $row['time_limit_minutes']; ?> min</p>
+                <p> Marks: <?php echo $row['total_marks']; ?></p>
 
                 <div class="btn-group">
 
