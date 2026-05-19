@@ -1,0 +1,171 @@
+body{
+    margin: 20;
+    padding: 20;
+    font-family: Arial, sans-serif;
+    background: #504a65;
+}
+
+.container{
+    width: 85%;
+    margin: 30px auto;
+}
+
+
+h2{
+    color: #e5eaf8;
+    font-size: 32px;
+}
+
+p{
+    color: #555;
+    font-size: 18px;
+}
+
+
+.card{
+    background: rgb(195, 201, 236);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    border-left: 6px solid #3a3543;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+
+.btn{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: #5834c2;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+
+.btn:hover{
+    background: #cdd0d7;
+}
+
+
+.card h3{
+    margin: 0;
+    color: #b2bed7;
+}
+
+
+
+
+
+
+
+
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+th{
+    background: #484db3;
+    color: white;
+    padding: 12px;
+}
+
+td{
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover{
+    background: #f1f5f9;
+}
+
+
+
+.card{
+    background: rgb(50, 40, 60);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    border-left: 6px solid #fcfcfc;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+
+.btn{
+    display: inline-block;
+    padding: 12px 22px;
+    background: linear-gradient(to right, #4b4993, #1e40af);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(37,99,235,0.3);
+}
+
+
+.monitor-btn{
+    background: linear-gradient(to right, #4660e0, #2e45dc);
+    box-shadow: 0 4px 10px rgba(245,158,11,0.3);
+}
+
+.monitor-btn:hover{
+    background: linear-gradient(to right, #d3d1cf, #f7f7f7);
+}
+
+
+.doubt-btn{
+    background: linear-gradient(to right, #413ed5, #433aed);
+    box-shadow: 0 4px 10px rgba(139,92,246,0.3);
+}
+
+.doubt-btn:hover{
+    background: linear-gradient(to right, #e1e1e1, #dcdae0);
+}
+
+
+
+
+.danger{
+    background: linear-gradient(to right, #ef4444, #b91c1c);
+}
+
+.danger:hover{
+    background: #7f1d1d;
+}
+
+
+
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* optional spacing */
+}
+
+
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
