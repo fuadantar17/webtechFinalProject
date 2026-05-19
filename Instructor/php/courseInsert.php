@@ -34,7 +34,7 @@ if(isset($_POST['create_course'])){
         header("Location: ../html/dashboard.php");
         exit();
     } else {
-        echo "❌ Failed to Create Course";
+        echo " Failed to Create Course";
     }
 
 }

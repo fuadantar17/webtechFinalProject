@@ -13,6 +13,7 @@ if ($action === 'approve' && isset($_GET['id'])) {
     $stmt->execute();
     header("Location: enrollments.php?success=Enrollment approved");
     exit;
+    
 }
 
 if ($action === 'reject' && isset($_GET['id'])) {

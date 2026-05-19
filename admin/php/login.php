@@ -14,12 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($id === "" || $password === "") {
         header("Location: login.php?error=ID and password are required");
         exit;
+
     }
 
-    $stmt = $conn->prepare(
+    $stmt = $conn->prepare 
+    (
         "SELECT id, name, email, password_hash, role, is_active, profile_pic
          FROM users WHERE id = ? AND role = 'admin' LIMIT 1"
     );
+
 
     if (!$stmt) {
         die("Query failed: " . $conn->error);
@@ -54,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $_SESSION["profile_pic"] = $user["profile_pic"];
 
     header("Location: dashboard.php");
-    exit;
+    exit; 
 }
 
 include "../html/login.html";
